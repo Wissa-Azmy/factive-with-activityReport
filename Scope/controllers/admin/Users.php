@@ -490,6 +490,7 @@ class Users extends CI_Controller {
                     INNER JOIN doctors ON user_answers.user_id = doctors.id
                     INNER JOIN territory ON territory.id=doctors.territory
                     '.$where.' ORDER BY territory.territory';
+                    
             $usercount= $this->db->query($sql)->result();
         // }
  
@@ -509,20 +510,71 @@ class Users extends CI_Controller {
 
 
          /******************** PRINT REPORT ********************/
+    public function printactivityreport(){
+        if ($this->input->post("dateto")) {
+            $to=date('Y-m-d 00:00:00', strtotime($this->input->post("dateto")));
+        }else{
+            $to= date("Y-m-d H:i:s");
+        }
         
+        if ($this->input->post("datefrom")) {
+            $from=date('Y-m-d 00:00:00', strtotime($this->input->post("datefrom")));
+        }else{
+            $from= '00-00-00 00:00:00';
+        }
         
+        $where[] =' creation_date >= \''.$from.'\'';
+        $where[] =' creation_date <= \''.$to.'\'';
+        if ($_POST['territory']){
+            $where[] =' doctors.territory='.$_POST['territory'];
+        }
          
+        // if ($_POST['specialty']){
+        //     $where[] =' doctors.specialty='.$_POST['specialty'];
+        // }
         
         
+        if(!empty($where)){
+            $where = ' WHERE '.implode(' AND ', $where);
+        }else{
+            $where = '';
+        }
          
          
+        // if ($_POST['question']){
+        //     $sqlq='SELECT * FROM questions WHERE id='.$_POST['question'];
+        //     $questiontext = $this->db->query($sqlq)->result();
+        //     $this->data['questiontext'] = $questiontext[0]->question;
 
+        //     $sql='SELECT  DISTINCT doctors.id,doctors.first_name,doctors.last_name,territory.territory,specialty.specialty FROM user_answers INNER JOIN doctors ON user_answers.user_id=doctors.id
+        //              INNER JOIN territory ON territory.id=doctors.territory
+        //             INNER JOIN specialty ON specialty.id=doctors.specialty
+        //             '.$where.' AND user_answers.question_id='.$_POST['question'].' ORDER BY territory.territory,specialty.specialty,doctors.first_name,doctors.last_name ';
             
+        //     $usercount= $this->db->query($sql)->result();
         
+        // }else{
+            
 
+            $sql='SELECT  DISTINCT territory.territory, creation_date FROM user_answers
+                    INNER JOIN doctors ON user_answers.user_id = doctors.id
+                    INNER JOIN territory ON territory.id=doctors.territory
+                    '.$where.' ORDER BY territory.territory';
             
+            $usercount= $this->db->query($sql)->result();
         
+        // }         
     
+        $fp = fopen(FCPATH.'uploaded/activityreport.csv', 'w');
+        fputs($fp,b"\xEF\xBB\xBF");         //write utf-8 BOM to file
+        fputcsv($fp, array("Territory","Activity Time"));
+        foreach ($usercount as $doctor) { 
+            fputcsv($fp, array($doctor->territory,$doctor->creation_date));
+        }
+        fclose($fp);
+    
+        redirect(base_url().'uploaded/activityreport.csv');
+    }
 
 
 
