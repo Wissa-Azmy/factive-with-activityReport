@@ -43,6 +43,14 @@ $data_uls = array(
 				        'table'=>'reports',
 				        'action'=>'view',
 				    ),
+				    array(
+				        'name'=>'Activity Report',
+				        'link'=>base_url().'admin/users/activityreportform',
+				        'icon'=>'',
+				        'table'=>'reports',
+				        'action'=>'view',
+				    ),
+
 				)
 		),
  )
