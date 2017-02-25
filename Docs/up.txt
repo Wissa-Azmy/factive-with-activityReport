@@ -1,0 +1,18 @@
+Cpanel Credentials:
+Ne-port.com/cpanel
+UN: emmport
+Pass: e63wFqzQLGx!y$aX07
+
+---------------------------
+
+DB: emmport_ne_new
+user: emmport_ne_new
+pass: w%)peg0FFUgU
+
+---------------------------
+
+admin supper user
+admin: support
+user: scope
+
+

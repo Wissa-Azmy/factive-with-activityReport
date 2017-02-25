@@ -1,0 +1,12 @@
+<chart caption='Answers Chart' xAxisName='Answers' yAxisName='Percentage of Users' showValues='1' decimals='0' formatNumberScale='0.5'>
+ <set label='FACTIVE is Trustworthy.' value='83' />
+ <set label='FACTIVE has a unique Mechanism of Action.' value='0' />
+ <set label='FACTIVE has an excellent Microbiological Profile.' value='0' />
+ <set label='FACTIVE has an optimum Pharmacokinetic Parameters.' value='17' />
+ <set label='FACTIVE has an optimum Pharmacokinetic /Pharmacodynamics Parameters.' value='0' />
+ <set label='FACTIVE is characterized by a good Distribution in Respiratory Tissue.' value='0' />
+ <set label='FACTIVE has the lowest potential of Bacterial Resistance Development' value='0' />
+ <set label='FACTIVE is associated with high Clinical Effectiveness.' value='0' />
+ <set label='FACTIVE is associated with high Patient Compliance.' value='0' />
+ <set label='FACTIVE is safer and more tolerable compared to other Fluoroquinolones.' value='0' />
+ </chart>
